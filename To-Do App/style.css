@@ -1,0 +1,105 @@
+body {
+    font-family: sans-serif;
+    background-color: #f4f4f9;
+    display: flex;
+    justify-content: center;
+    padding-top: 50px;
+}
+
+.todo-container {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 400px;
+}
+
+.input-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+button {
+    padding: 10px 15px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    background: #fff;
+    border-bottom: 1px solid #eee;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Use JS to toggle this class */
+.completed {
+    text-decoration: line-through;
+    color: #888;
+}
+
+/* Ensure the text span takes up available space so buttons push to the right */
+li span {
+    flex-grow: 1;
+    margin-right: 15px;
+    word-break: break-all; /* Prevents long text from breaking layout */
+}
+
+.button-group {
+    display: flex;
+    gap: 8px; /* Space between Edit and Delete */
+    flex-shrink: 0; /* Prevents buttons from squishing on small screens */
+}
+
+/* Base style for the action buttons (Edit/Delete) */
+.btn-action {
+    padding: 6px 10px;
+    font-size: 0.85rem;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    color: white;
+    transition: background 0.2s;
+}
+
+/* Specific Edit Button (Yellow/Amber) */
+.edit-btn {
+    background-color: #ffc107;
+    color: #212529; /* Dark text for better contrast on yellow */
+}
+
+.edit-btn:hover {
+    background-color: #e0a800;
+}
+
+/* Specific Delete Button (Red) */
+.delete-btn {
+    background-color: #dc3545;
+}
+
+.delete-btn:hover {
+    background-color: #c82333;
+}
