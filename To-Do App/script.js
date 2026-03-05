@@ -6,7 +6,7 @@ const input = document.getElementById("todo-input")
 function addItem() {
     const text = input.value.trim()
     if(!text) {
-        console.log("Enter a valid value.");
+        alert("Enter a valid value.");
         return
     }
 
@@ -16,7 +16,7 @@ function addItem() {
     const editBtn = document.createElement('button')
     const deleteBtn = document.createElement('button')
 
-    textSpan.innerText = text
+    textSpan.innerText = text.charAt(0).toUpperCase() + text.slice(1)
     editBtn.innerText = "Edit"
     deleteBtn.innerText = "Delete"
 
