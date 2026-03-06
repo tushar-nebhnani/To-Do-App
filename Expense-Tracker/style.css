@@ -1,0 +1,314 @@
+/* Custom Variables */
+:root {
+  --primary-gradient: linear-gradient(135deg, #6c5ce7, #a29bfe);
+  --bg-dark: #0f172a;
+  --card-dark: #1e293b;
+  --text-main: #f8fafc;
+  --text-dim: #94a3b8;
+  --success: #10b981;
+  --danger: #ef4444;
+  --info: #38bdf8;
+}
+
+/* Global Reset */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bg-dark);
+  color: var(--text-main);
+  font-family: 'Inter', sans-serif;
+  display: flex;
+  justify-content: center;
+  padding: 40px 20px;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.container {
+  width: 100%;
+  max-width: 480px;
+}
+
+header h2 {
+  text-align: center;
+  font-weight: 300;
+  letter-spacing: 2px;
+  margin-bottom: 30px;
+  text-transform: uppercase;
+}
+
+h3 {
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin: 25px 0 15px;
+  color: var(--text-dim);
+  border-bottom: 1px solid #334155;
+  padding-bottom: 8px;
+}
+
+/* Hero Balance Card */
+.balance-card {
+  background: var(--primary-gradient);
+  padding: 35px 30px;
+  border-radius: 24px;
+  text-align: left;
+  box-shadow: 0 15px 35px rgba(108, 92, 231, 0.25);
+  margin-bottom: 25px;
+  position: relative;
+  overflow: hidden;
+}
+
+.balance-card p {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  opacity: 0.8;
+  margin: 0;
+}
+
+.balance-card h1 {
+  font-size: 2.8rem;
+  margin: 5px 0 0;
+  font-weight: 700;
+}
+
+/* Visual Decoration for the Card */
+.card-chip {
+  position: absolute;
+  right: 30px;
+  top: 35px;
+  width: 45px;
+  height: 35px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Income/Expense/Remaining Mini Cards */
+.stats-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Equal 3 columns */
+  gap: 12px;
+  margin-bottom: 30px;
+}
+
+.stat-box {
+  background: var(--card-dark);
+  padding: 15px 10px;
+  border-radius: 16px;
+  text-align: center;
+  border: 1px solid #334155;
+  transition: transform 0.2s ease;
+}
+
+.stat-box:hover {
+  border-color: #475569;
+}
+
+.stat-box span {
+  font-size: 0.7rem;
+  color: var(--text-dim);
+  display: block;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+}
+
+.stat-box p {
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.income p { color: var(--success); }
+.expense p { color: var(--danger); }
+.remaining p { color: var(--info); }
+
+/* Transaction History List */
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.list li {
+  background: var(--card-dark);
+  margin-bottom: 12px;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 12px;
+  border: 1px solid #334155;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.list li:hover {
+  transform: scale(1.02);
+  border-color: #475569;
+}
+
+.list li.plus { border-left: 5px solid var(--success); }
+.list li.minus { border-left: 5px solid var(--danger); }
+
+/* Form Elements */
+.form-section {
+  margin-top: 20px;
+}
+
+#form input, #form select {
+  background: #1e293b;
+  border: 1px solid #334155;
+  padding: 14px;
+  border-radius: 10px;
+  color: var(--text-main);
+  font-size: 1rem;
+  width: 100%;
+  margin-bottom: 12px;
+  transition: all 0.2s;
+}
+
+#form input:focus, #form select:focus {
+  outline: none;
+  border-color: #6c5ce7;
+  box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.2);
+}
+
+.input-group {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 12px;
+}
+
+/* Button Styling */
+.btn {
+  background: var(--primary-gradient);
+  color: white;
+  border: none;
+  width: 100%;
+  padding: 16px;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 10px;
+  box-shadow: 0 4px 15px rgba(108, 92, 231, 0.2);
+  transition: all 0.2s;
+}
+
+.btn:hover {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+/* Utility to hide/show list when empty */
+#list:empty::after {
+  content: "No transactions yet.";
+  color: var(--text-dim);
+  display: block;
+  text-align: center;
+  padding: 20px;
+  font-style: italic;
+}
+
+/* Container for the transactions */
+.list {
+  list-style-type: none;
+  padding: 0;
+  margin-bottom: 40px;
+}
+
+.list li {
+  background-color: var(--card-dark); /* Using your variable from earlier */
+  color: var(--text-main);
+  display: flex;
+  justify-content: space-between; /* This pushes text left and span right */
+  position: relative;
+  padding: 15px;
+  margin: 10px 0;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+}
+
+/* Subtle hover effect */
+.list li:hover {
+  transform: translateX(5px);
+}
+
+/* The color-coded borders */
+.list li.plus {
+  border-right: 5px solid var(--success);
+}
+
+.list li.minus {
+  border-right: 5px solid var(--danger);
+}
+
+/* Styling the amount span */
+.list li span {
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+/* The Description Text */
+.details-desc {
+  color: var(--text-main);
+  font-weight: 500;
+  text-transform: capitalize; /* Makes "rent" look like "Rent" */
+}
+
+/* The Amount Text */
+.details-amt {
+  font-family: 'Courier New', Courier, monospace; /* Monospace keeps numbers aligned */
+  font-weight: 700;
+}
+
+/* Color specifically based on the parent class */
+.plus .details-amt {
+  color: var(--success); /* Green for income */
+}
+
+.minus .details-amt {
+  color: var(--danger); /* Red for expenses */
+}
+
+/* Optional: Add a subtle background tint */
+.plus {
+  background: linear-gradient(to right, rgba(16, 185, 129, 0.1), var(--card-dark));
+}
+
+.minus {
+  background: linear-gradient(to right, rgba(239, 68, 68, 0.1), var(--card-dark));
+}
+
+/* Styling for Credit Transactions (Green) */
+.list li.plus {
+    border-right: 5px solid var(--success);
+    background: linear-gradient(to right, rgba(16, 185, 129, 0.05), #1e293b);
+}
+
+.list li.plus span {
+    color: var(--success);
+}
+
+/* Styling for Debit Transactions (Red) */
+.list li.minus {
+    border-right: 5px solid var(--danger);
+    background: linear-gradient(to right, rgba(239, 68, 68, 0.05), #1e293b);
+}
+
+.list li.minus span {
+    color: var(--danger);
+}
+
+/* Base style for the span (The Amount) */
+.list li span {
+    font-weight: bold;
+    font-family: 'Courier New', Courier, monospace;
+}

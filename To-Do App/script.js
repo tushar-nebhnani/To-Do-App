@@ -1,6 +1,7 @@
 const list = document.getElementById("todo-list")
 const addBtn = document.getElementById("add-btn")
 const input = document.getElementById("todo-input")
+const idx = 0
 
 // Create
 function addItem() {
@@ -25,7 +26,7 @@ function addItem() {
     deleteBtn.className = "btn-action delete-btn";
 
     btnGrouper.append(editBtn, deleteBtn)  
-    
+    localStorage.setItem(idx, text)
     
     li.append(textSpan, btnGrouper)
     list.append(li)
@@ -34,6 +35,7 @@ function addItem() {
     editBtn.onclick = () => updateItem(textSpan)
 
     input.value = ""
+    idx++
 }
 
 // Update
@@ -45,6 +47,7 @@ function updateItem(item) {
 // Delete
 function deleteItem(item) {
     item.remove()
+    localStorage.removeItem(idx)
 }
 
 // addBtn.onclick = addItem() This will automatically runs the code, without waiting for the event to happen BUG: 1
