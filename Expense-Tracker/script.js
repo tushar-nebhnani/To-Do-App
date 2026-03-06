@@ -17,10 +17,14 @@ function addTransaction(transaction) {
     let sign = transaction.type === 'credit'? "+" : "-"
     li.setAttribute('data-id', transaction.id)
     let data = `
-        ${transaction.text} 
-        <span>${sign}$${Math.abs(transaction.amt).toFixed(2)}</span>
-        <button class="editBtn">✎</button>
-        <button class="deleteBtn">×</button>
+        <div class="transaction-info">
+            <span class="details-desc">${transaction.text}</span>
+            <span class="details-amt">${sign}₹${Math.abs(transaction.amt).toFixed(2)}</span>
+        </div>
+        <div class="transaction-actions">
+            <button class="editBtn" title="Edit">✎</button>
+            <button class="deleteBtn" title="Delete">×</button>
+        </div>
     `
     li.innerHTML = data
     list.append(li)
@@ -89,31 +93,35 @@ function refreshUI() {
 addBtn.onclick = (e) => updateBalance(e)
 
 list.addEventListener('click', e => {
-    if(e.target.classList.contains('editBtn')) {
-        const id = e.target.parentElement.getAttribute('data-id')
+    const li = e.target.closest('li');
+    if (!li) return; 
 
-        const selectTransaction = transactions.find(t => t.id == id)
+    const id = li.getAttribute('data-id');
 
-        const newText = prompt("Enter the updated description: ")
-        const newAmt = prompt("Enter the updated amount: ")
-        const newType = prompt("Enter type(credit/debit): ")
+    if (e.target.classList.contains('editBtn')) {
+        const selectTransaction = transactions.find(t => t.id == id);
 
-        if (newText && newAmt) {
-        selectTransaction.text = newText;
-        selectTransaction.amt = parseFloat(newAmt);
-        selectTransaction.type = newType
-        
-        refreshUI(); 
+        const newText = prompt("Enter the updated description: ", selectTransaction.text);
+        const newAmt = prompt("Enter the updated amount: ", selectTransaction.amt);
+        const newType = prompt("Enter type (credit/debit): ", selectTransaction.type);
+
+        if (newText && newAmt && newType) {
+            selectTransaction.text = newText;
+            selectTransaction.amt = parseFloat(newAmt);
+            selectTransaction.type = newType;
+            
+            refreshUI(); 
         }
-    } else if(e.target.classList.contains('deleteBtn')) {
-        const id = e.target.parentElement.getAttribute('data-id')
-        const idx = transactions.findIndex(t => t.id == id)
+    } 
+
+    else if (e.target.classList.contains('deleteBtn')) {
+        const idx = transactions.findIndex(t => t.id == id);
 
         if (idx != -1) {
-            transactions.splice(idx, 1)
+            transactions.splice(idx, 1);
+            refreshUI();
         }
-        refreshUI()
     }
-})
+});
 
 refreshUI()
