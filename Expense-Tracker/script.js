@@ -18,8 +18,8 @@ function addTransaction(transaction) {
     let data = `
         ${transaction.text} 
         <span>${sign}$${Math.abs(transaction.amt).toFixed(2)}</span>
-        <button id="editBtn">Update</button>
-        <button id="deleteBtn">Delete</button>
+        <button class="editBtn">Update</button>
+        <button class="deleteBtn">Delete</button>
     `
     li.innerHTML = data
     list.append(li)
@@ -74,4 +74,36 @@ function updateValues(transactions) {
     balance.innerText = `₹${totalValue}`
 }
 
+function refreshUI() {
+    list.innerHTML = ""
+    transactions.forEach(addTransaction); 
+    updateValues(transactions)
+}
+
 addBtn.onclick = (e) => updateBalance(e)
+
+list.addEventListener('click', e => {
+    if(e.target.classList.contains('editBtn')) {
+        const id = e.target.parentElement.getAttribute('data-id')
+
+        const selectTransaction = transactions.find(t => t.id == id)
+
+        const newText = prompt("Enter the updated description: ")
+        const newAmt = prompt("Enter the updated amount: ")
+
+        if (newText && newAmt) {
+        selectTransaction.text = newText;
+        selectTransaction.amt = parseFloat(newAmt);
+        
+        refreshUI(); 
+        }
+    } else if(e.target.classList.contains('deleteBtn')) {
+        const id = e.target.parentElement.getAttribute('data-id')
+        const idx = transactions.findIndex(t => t.id == id)
+
+        if (idx != -1) {
+            transactions.splice(idx, 1)
+        }
+        refreshUI()
+    }
+})
