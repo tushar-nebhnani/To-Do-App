@@ -4,6 +4,8 @@ const list = document.getElementById("list")
 
 addButton.addEventListener("click", () => {
     const text = input.value // form element doesn't have any text content
+    const inputDisplay = document.createElement("input")
+    inputDisplay.readOnly = true
     
     if (text.trim() == "") {
         alert("Please enter the task")
@@ -15,20 +17,23 @@ addButton.addEventListener("click", () => {
     deleteButton.textContent = "Delete"
     deleteButton.classList.add("delete")
 
-    li.textContent = text
-    li.append(deleteButton)
-
+    inputDisplay.value = text
+    
     deleteButton.addEventListener("click", () => {
         li.remove()
     })
 
     li.addEventListener("dblclick", () => {
-        const updateText = prompt("Enter the updated value: ")
-        li.innerText = updateText
+        // const updateText = prompt("Enter the updated value: ")
+        // li.innerText = updateText
 
-        li.append(deleteButton)
+        // li.append(deleteButton)
+        inputDisplay.readOnly = false
+        inputDisplay.value = text
     })
 
+    li.append(inputDisplay)
+    li.append(deleteButton)
     list.append(li)
     input.value = ""
 })
