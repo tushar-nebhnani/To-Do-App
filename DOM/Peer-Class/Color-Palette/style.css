@@ -1,47 +1,85 @@
-body{
-margin:0;
-height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
-background:#121212;
-color:white;
-font-family:sans-serif;
+/* Existing styles maintained for context */
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #121212;
+  color: white;
+  font-family: sans-serif;
 }
 
-.container{
-text-align:center;
+.container {
+  text-align: center;
 }
 
-.controls{
-margin-bottom:20px;
+.controls {
+  margin-bottom: 20px;
 }
 
-select,button{
-padding:8px 12px;
-margin:5px;
-border:none;
-border-radius:6px;
+select, button {
+  padding: 8px 12px;
+  margin: 5px;
+  border: none;
+  border-radius: 6px;
 }
 
-button{
-background:#4caf50;
-color:white;
-cursor:pointer;
+/* Base button style for the "Generate" button */
+button {
+  background: #4caf50;
+  color: white;
+  cursor: pointer;
 }
 
-.palette{
-display:flex;
-gap:10px;
+.palette {
+  display: flex;
+  gap: 10px;
 }
 
-.color{
-width:100px;
-height:120px;
-border-radius:8px;
-display:flex;
-justify-content:center;
-align-items:end;
-padding:10px;
-font-weight:bold;
+.color {
+  width: 100px;
+  height: 120px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column; /* Stack color info and button */
+  justify-content: flex-end; /* Push content to bottom */
+  align-items: center;
+  padding: 10px;
+  font-weight: bold;
+  transition: transform 0.2s ease;
+}
+
+/* --- Refined Copy Button CSS --- */
+.btn-copy {
+  width: 100%; /* Spans the width of the color box padding */
+  padding: 6px 0;
+  margin-top: 8px;
+  background-color: rgba(0, 0, 0, 0.3); /* Semi-transparent overlay */
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  text-transform: uppercase;
+}
+
+/* Hover: Slightly brighter */
+.btn-copy:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-1px);
+}
+
+/* Success State: Triggered via JS .classList.add('success') */
+.btn-copy.success {
+  background-color: #4caf50 !important;
+  border-color: #4caf50;
+  color: white;
+}
+
+/* Active: Physical click feel */
+.btn-copy:active {
+  transform: translateY(0);
 }

@@ -44,11 +44,30 @@ function generatePalette() {
         }
 
         const div = document.createElement("div")
+        const copyBtn = document.createElement("button")
+        copyBtn.classList.add("btn-copy")
+        copyBtn.innerText = "Copy"
+        copyBtn.style.background = "black"
         div.classList.add("color")
-
+        
         div.style.background = `rgb(${r}, ${g}, ${b})`
         div.textContent = color
+        
+        copyBtn.addEventListener("click", async () => {
+            try {
+                await navigator.clipboard.writeText(color)
+                copyBtn.innerText = "Copied"
 
+                setTimeout(() => {
+                    copyBtn.innerText = "copy"
+                }, 1000)
+            } catch (error) {
+                alert("access denied")
+            }
+            
+        })
+        
+        div.appendChild(copyBtn)
         pallete.appendChild(div)
     }
 }
